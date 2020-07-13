@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import mixins
 from rest_framework import generics
+from rest_framework import permissions
 
 from tutorial.snippets.models import Snippet
 from tutorial.snippets.serializers import SnippetSerializer
@@ -60,6 +61,7 @@ class SnippetList(generics.ListCreateAPIView):
     """
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -68,3 +70,4 @@ class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
